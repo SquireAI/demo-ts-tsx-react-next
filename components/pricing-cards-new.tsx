@@ -21,8 +21,12 @@ interface PricingCardsProps {
 }
 
 export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
-  const isYearlyDefault =
-    !subscriptionPlan?.stripeCustomerId || subscriptionPlan.interval === "year" ? true : false;
+  let isYearlyDefault;
+  if (!subscriptionPlan?.stripeCustomerId || subscriptionPlan.interval === "year") {
+    isYearlyDefault = true;
+  } else {
+    isYearlyDefault = false;
+  }
   const [isYearly, setIsYearly] = useState<boolean>(!!isYearlyDefault);
   const signInModal = useSigninModal();
 
@@ -187,3 +191,4 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
     </section>
   );
 }
+
